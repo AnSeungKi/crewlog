@@ -1,0 +1,35 @@
+{
+  "name": "crewlog",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CREWLOG — 동네 번개 모임과 인증샷을 잇는 하이퍼로컬 커뮤니티",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit",
+    "prisma:generate": "prisma generate"
+  },
+  "dependencies": {
+    "@ant-design/icons": "^5.6.1",
+    "@ant-design/nextjs-registry": "^1.1.0",
+    "antd": "^5.29.3",
+    "dayjs": "^1.11.13",
+    "next": "^15.5.29",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.10.5",
+    "@types/react": "^19.0.7",
+    "@types/react-dom": "^19.0.3",
+    "prisma": "^6.2.1",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.7.3"
+  },
+  "overrides": {
+    "magic-string": "^0.30.17"
+  }
+}

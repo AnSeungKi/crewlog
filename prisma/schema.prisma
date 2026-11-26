@@ -1,0 +1,186 @@
+// CREWLOG — Prisma schema (PostgreSQL)
+// The app ships with an in-memory seed layer so it runs before a database is
+// connected. Point DATABASE_URL at Postgres and `npx prisma migrate dev` to
+// switch the same shapes onto a real database.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Neighborhood {
+  SEONGSU
+  YEONNAM
+  JAMSIL
+  PANGYO
+}
+
+enum Category {
+  RUNNING
+  CAFE
+  HIKING
+  BOARDGAME
+  PHOTOWALK
+}
+
+enum BoostStatus {
+  PENDING
+  PAID
+  REFUNDED
+}
+
+model User {
+  id        String   @id @default(cuid())
+  handle    String   @unique
+  name      String
+  bio       String?
+  avatarUrl String?
+  accent    String   @default("#E84A27")
+  isPro     Boolean  @default(false)
+  isPartner Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  hostedMeetups Meetup[]            @relation("MeetupHost")
+  joinedMeetups MeetupParticipant[]
+  posts         ProofPost[]
+  comments      Comment[]
+  boostOrders   BoostOrder[]
+  couponClaims  CouponClaim[]
+
+  @@index([handle])
+}
+
+model Meetup {
+  id           String       @id @default(cuid())
+  slug         String       @unique
+  title        String
+  description  String       @db.Text
+  category     Category
+  neighborhood Neighborhood
+  startsAt     DateTime
+  place        String
+  capacity     Int
+  coverImage   String?
+  boostedUntil DateTime?
+  hostId       String
+  sponsorId    String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+
+  host         User              @relation("MeetupHost", fields: [hostId], references: [id], onDelete: Cascade)
+  sponsor      SponsorPin?       @relation(fields: [sponsorId], references: [id], onDelete: SetNull)
+  participants MeetupParticipant[]
+  posts        ProofPost[]
+  boosts       BoostOrder[]
+
+  @@index([neighborhood, startsAt])
+  @@index([startsAt])
+  @@index([hostId])
+}
+
+model MeetupParticipant {
+  id       String   @id @default(cuid())
+  meetupId String
+  userId   String
+  joinedAt DateTime @default(now())
+  attended Boolean  @default(false)
+
+  meetup Meetup @relation(fields: [meetupId], references: [id], onDelete: Cascade)
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([meetupId, userId])
+  @@index([userId])
+}
+
+model ProofPost {
+  id           String       @id @default(cuid())
+  title        String
+  body         String       @db.Text
+  imageUrl     String?
+  category     Category
+  neighborhood Neighborhood
+  authorId     String
+  meetupId     String?
+  likeCount    Int          @default(0)
+  createdAt    DateTime     @default(now())
+
+  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  meetup   Meetup?   @relation(fields: [meetupId], references: [id], onDelete: SetNull)
+  comments Comment[]
+
+  @@index([neighborhood, createdAt])
+  @@index([meetupId])
+  @@index([authorId])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  body      String   @db.Text
+  postId    String
+  authorId  String
+  parentId  String?
+  createdAt DateTime @default(now())
+
+  post     ProofPost @relation(fields: [postId], references: [id], onDelete: Cascade)
+  author   User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
+  parent   Comment?  @relation("CommentThread", fields: [parentId], references: [id], onDelete: Cascade)
+  replies  Comment[] @relation("CommentThread")
+
+  @@index([postId, createdAt])
+}
+
+model SponsorPin {
+  id             String       @id @default(cuid())
+  name           String
+  categoryLabel  String
+  neighborhood   Neighborhood
+  benefit        String
+  detail         String       @db.Text
+  couponCode     String       @unique
+  discountRate   Int?
+  latitude       Float
+  longitude      Float
+  active         Boolean      @default(true)
+  expiresAt      DateTime
+  createdAt      DateTime     @default(now())
+
+  meetups Meetup[]
+  claims  CouponClaim[]
+
+  @@index([neighborhood, active])
+}
+
+model CouponClaim {
+  id        String    @id @default(cuid())
+  sponsorId String
+  userId    String
+  claimedAt DateTime  @default(now())
+  usedAt    DateTime?
+
+  sponsor SponsorPin @relation(fields: [sponsorId], references: [id], onDelete: Cascade)
+  user    User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sponsorId, userId])
+}
+
+model BoostOrder {
+  id        String      @id @default(cuid())
+  meetupId  String
+  userId    String
+  amount    Int
+  hours     Int         @default(24)
+  status    BoostStatus @default(PAID)
+  startsAt  DateTime    @default(now())
+  endsAt    DateTime
+  createdAt DateTime    @default(now())
+
+  meetup Meetup @relation(fields: [meetupId], references: [id], onDelete: Cascade)
+  buyer  User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([meetupId, endsAt])
+  @@index([userId])
+}

@@ -1,0 +1,183 @@
+@layer theme, base, antd, components, utilities;
+
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #faf8f5;
+  --color-paper-deep: #f4f0e9;
+  --color-surface: #ffffff;
+  --color-ink: #141413;
+  --color-ink-soft: #3d3a36;
+  --color-muted: #6b6660;
+  --color-faint: #9a948c;
+  --color-line: #e5e0d8;
+  --color-line-soft: #efebe4;
+  --color-vermilion: #e84a27;
+  --color-vermilion-soft: #fbe9e3;
+  --color-forest: #1f5e4b;
+  --color-forest-soft: #e4ece7;
+  --color-brass: #9a7b3f;
+
+  --font-sans: var(--font-plex-sans), "Apple SD Gothic Neo", "Noto Sans KR",
+    system-ui, sans-serif;
+  --font-serif: var(--font-gowun), "AppleMyungjo", "Batang", ui-serif, Georgia,
+    serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", monospace;
+}
+
+/* ---------- base ---------- */
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: #f6d3c9;
+  color: var(--color-ink);
+}
+
+/* tactile paper grain, sits under every surface and above nothing interactive */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.055'/%3E%3C/svg%3E");
+}
+
+/* ---------- editorial primitives ---------- */
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: 1.4;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-faint);
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.02em;
+}
+
+.display {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.14;
+  color: var(--color-ink);
+}
+
+.display em {
+  font-style: normal;
+  color: var(--color-vermilion);
+}
+
+.hairline {
+  border: 1px solid var(--color-line);
+}
+
+.rule {
+  height: 1px;
+  background: var(--color-line);
+}
+
+.ink-link {
+  text-decoration: none;
+  color: inherit;
+  background-image: linear-gradient(currentColor, currentColor);
+  background-size: 0% 1px;
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  transition: background-size 0.28s ease;
+}
+
+.ink-link:hover {
+  background-size: 100% 1px;
+}
+
+/* ---------- antd refinements ---------- */
+
+.ant-btn {
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  box-shadow: none !important;
+}
+
+.ant-btn-primary:not(:disabled):hover {
+  background: #cf3f1f !important;
+}
+
+.ant-card {
+  overflow: hidden;
+}
+
+.ant-tag {
+  margin-inline-end: 0;
+}
+
+.ant-segmented {
+  font-weight: 500;
+}
+
+.ant-modal-content,
+.ant-drawer-content {
+  border: 1px solid var(--color-line);
+}
+
+.ant-input::placeholder,
+.ant-input-affix-wrapper input::placeholder {
+  color: #a8a29a;
+}
+
+.ant-comment-like {
+  cursor: pointer;
+}
+
+/* thin, quiet scrollbars inside panes */
+.quiet-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: #d9d3c9 transparent;
+}
+
+.quiet-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.quiet-scroll::-webkit-scrollbar-thumb {
+  background: #d9d3c9;
+  border-radius: 999px;
+}
+
+@keyframes crewlog-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(232, 74, 39, 0.35);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(232, 74, 39, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(232, 74, 39, 0);
+  }
+}
+
+.live-dot {
+  animation: crewlog-pulse 2.4s infinite;
+}
