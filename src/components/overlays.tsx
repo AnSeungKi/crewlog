@@ -1,20 +1,19 @@
 "use client";
 
-import { BoostModal } from "./boost-modal";
-import { Composer } from "./composer";
-import { CouponModal } from "./coupon-modal";
-import { MeetupDetail } from "./meetup-detail";
-import { ProModal } from "./pro-modal";
+import { CreateSheet, ComposerSheet } from "./sheets/composer";
+import { BoostSheet, CouponSheet, ProSheet } from "./sheets/offers";
+import { MeetupDetailSheet } from "./meetup-detail";
 
-/** every modal and drawer of the app, mounted once */
+/** every sheet and overlay of the app, mounted once */
 export function AppOverlays() {
   return (
     <>
-      <Composer />
-      <MeetupDetail />
-      <BoostModal />
-      <ProModal />
-      <CouponModal />
+      <CreateSheet />
+      <ComposerSheet />
+      <MeetupDetailSheet />
+      <BoostSheet />
+      <CouponSheet />
+      <ProSheet />
     </>
   );
 }

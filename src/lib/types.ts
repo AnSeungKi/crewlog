@@ -5,9 +5,11 @@ export type CategoryId = "running" | "cafe" | "hiking" | "boardgame" | "photowal
 export interface Category {
   id: CategoryId;
   label: string;
+  /** pin / accent colour */
   color: string;
+  /** very light surface used behind the colour */
   tint: string;
-  /** short editorial line used on cards */
+  /** one-line description used in filter sheets */
   blurb: string;
 }
 
@@ -15,8 +17,9 @@ export interface Neighborhood {
   id: NeighborhoodId;
   label: string;
   note: string;
-  /** two-letter code used in the map corner */
-  code: string;
+  lat: number;
+  lng: number;
+  zoom: number;
 }
 
 export interface CrewUser {
@@ -36,6 +39,8 @@ export interface Meetup {
   neighborhoodId: NeighborhoodId;
   startsAt: string;
   place: string;
+  lat: number;
+  lng: number;
   hostId: string;
   capacity: number;
   participantIds: string[];
@@ -79,9 +84,8 @@ export interface SponsorPin {
   detail: string;
   code: string;
   expiresAt: string;
-  /** map placement in percent of the map canvas */
-  x: number;
-  y: number;
+  lat: number;
+  lng: number;
 }
 
 export interface BoostOrder {

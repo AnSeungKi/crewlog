@@ -16,6 +16,7 @@ import {
   FEED,
   ME,
   MEETUPS,
+  NEIGHBORHOODS,
   POSTS,
   SPONSOR_PINS,
   sponsorOf,
@@ -50,6 +51,7 @@ interface StoreValue {
   liked: Record<string, boolean>;
   saved: Record<string, boolean>;
   joined: Record<string, boolean>;
+  interested: Record<string, boolean>;
   coupons: Record<string, boolean>;
   boosts: BoostOrder[];
   sponsors: SponsorPin[];
@@ -80,6 +82,7 @@ interface StoreValue {
   toggleLike: (postId: string) => void;
   toggleSave: (postId: string) => void;
   toggleJoin: (meetupId: string) => void;
+  toggleInterested: (meetupId: string) => void;
   addComment: (postId: string, body: string) => void;
   createMeetup: (input: CreateMeetupInput) => string;
   createPost: (input: CreatePostInput) => string;
@@ -87,6 +90,10 @@ interface StoreValue {
   claimCoupon: (sponsorId: string) => void;
 
   /* overlay state, shared by header / feed / map / footer */
+  createOpen: boolean;
+  openCreate: () => void;
+  closeCreate: () => void;
+
   composerOpen: boolean;
   composerTab: ComposerTab;
   openComposer: (tab?: ComposerTab) => void;
@@ -140,6 +147,7 @@ export function CrewlogProvider({ children }: { children: React.ReactNode }) {
   const [liked, setLiked] = useState<Record<string, boolean>>({});
   const [saved, setSaved] = useState<Record<string, boolean>>({});
   const [joined, setJoined] = useState<Record<string, boolean>>(initialJoined);
+  const [interested, setInterested] = useState<Record<string, boolean>>({});
   const [coupons, setCoupons] = useState<Record<string, boolean>>({});
   const [boosts, setBoosts] = useState<BoostOrder[]>([]);
 
@@ -147,6 +155,7 @@ export function CrewlogProvider({ children }: { children: React.ReactNode }) {
   const [category, setCategory] = useState<CategoryFilter>("all");
   const [sort, setSort] = useState<FeedSort>("recommended");
 
+  const [createOpen, setCreateOpen] = useState(false);
   const [composerOpen, setComposerOpen] = useState(false);
   const [composerTab, setComposerTab] = useState<ComposerTab>("meetup");
   const [detailId, setDetailId] = useState<string | null>(null);
@@ -297,6 +306,10 @@ export function CrewlogProvider({ children }: { children: React.ReactNode }) {
     setSaved((prev) => ({ ...prev, [postId]: !prev[postId] }));
   }, []);
 
+  const toggleInterested = useCallback((meetupId: string) => {
+    setInterested((prev) => ({ ...prev, [meetupId]: !prev[meetupId] }));
+  }, []);
+
   const toggleJoin = useCallback(
     (meetupId: string) => {
       const meetup = tasksById.get(meetupId);
@@ -333,6 +346,8 @@ export function CrewlogProvider({ children }: { children: React.ReactNode }) {
       neighborhoodId: input.neighborhoodId,
       startsAt: input.startsAt,
       place: input.place,
+      lat: (NEIGHBORHOODS.find((n) => n.id === input.neighborhoodId)?.lat ?? 37.5445) + (Math.random() - 0.5) * 0.006,
+      lng: (NEIGHBORHOODS.find((n) => n.id === input.neighborhoodId)?.lng ?? 127.0557) + (Math.random() - 0.5) * 0.006,
       hostId: ME.id,
       capacity: input.capacity,
       participantIds: [],
@@ -437,6 +452,7 @@ export function CrewlogProvider({ children }: { children: React.ReactNode }) {
     liked,
     saved,
     joined,
+    interested,
     coupons,
     boosts,
     sponsors: SPONSOR_PINS,
@@ -461,14 +477,19 @@ export function CrewlogProvider({ children }: { children: React.ReactNode }) {
     toggleLike,
     toggleSave,
     toggleJoin,
+    toggleInterested,
     addComment,
     createMeetup,
     createPost,
     boostMeetup,
     claimCoupon,
+    createOpen,
+    openCreate: () => setCreateOpen(true),
+    closeCreate: () => setCreateOpen(false),
     composerOpen,
     composerTab,
     openComposer: (tab = "meetup") => {
+      setCreateOpen(false);
       setComposerTab(tab);
       setComposerOpen(true);
     },

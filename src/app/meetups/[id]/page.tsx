@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { MeetupPageView } from "@/components/meetup-page";
+import { MeetupDetailPage } from "@/components/meetup-detail";
 import { MEETUPS } from "@/lib/seed";
 
 export const dynamicParams = false;
@@ -38,5 +38,5 @@ export default async function MeetupPage({
   const meetup = MEETUPS.find((item) => item.id === id);
   if (!meetup) notFound();
 
-  return <MeetupPageView id={id} />;
+  return <MeetupDetailPage id={id} />;
 }
