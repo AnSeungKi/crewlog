@@ -404,8 +404,8 @@ export function MeetupDetailSheet() {
 export function MeetupDetailPage({ id }: { id: string }) {
   const router = useRouter();
   return (
-    <div className="min-h-[100dvh] bg-[#F6F7FB]">
-      <div className="mx-auto h-[100dvh] max-w-[760px]">
+    <div className="min-h-[100dvh] bg-[#F6F7FB] md:py-8">
+      <div className="mx-auto h-[100dvh] max-w-[760px] overflow-hidden bg-[#F6F7FB] md:h-[calc(100dvh-64px)] md:rounded-[28px] md:border md:border-[#ECEEF3] md:shadow-[0_20px_60px_rgba(15,23,42,0.10)]">
         <MeetupDetailBody id={id} onBack={() => router.push("/")} />
       </div>
     </div>
