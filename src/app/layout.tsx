@@ -2,10 +2,10 @@ import type { Metadata, Viewport } from "next";
 import { AntdRegistry } from "@ant-design/nextjs-registry";
 import { Providers } from "./providers";
 import "./globals.css";
-import { asset, BASE_PATH } from "@/lib/asset";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
-  metadataBase: new URL(`https://anseungki.github.io${BASE_PATH}`),
+  metadataBase: new URL("https://anseungki.github.io"),
   title: {
     default: "크루로그 — 동네에서, 오늘 바로",
     template: "%s · 크루로그",
