@@ -42,7 +42,7 @@ export const crewlogTheme: ThemeConfig = {
     fontFamily: SANS,
     fontSize: 14,
     controlHeight: 40,
-    borderRadius: 14,
+    borderRadius: 16,
     borderRadiusLG: 20,
     borderRadiusSM: 10,
     lineWidth: 1,
@@ -64,21 +64,21 @@ export const crewlogTheme: ThemeConfig = {
     },
     Input: {
       controlHeight: 44,
-      borderRadius: 14,
+      borderRadius: 16,
       paddingInline: 14,
       activeShadow: "none",
     },
     Select: {
       controlHeight: 44,
-      borderRadius: 14,
+      borderRadius: 16,
     },
     DatePicker: {
       controlHeight: 44,
-      borderRadius: 14,
+      borderRadius: 16,
     },
     InputNumber: {
       controlHeight: 44,
-      borderRadius: 14,
+      borderRadius: 16,
     },
     Segmented: {
       trackBg: "#EDEFF5",

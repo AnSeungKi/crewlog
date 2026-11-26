@@ -111,7 +111,7 @@
 | `charcoal` | `#14161F` | 활성 칩·중앙 `+` 버튼·본문 |
 | `line` | `#ECEEF3` | 1px 경계 |
 | `shadow-card` | `0 6px 24px rgba(15,23,42,0.06)` | 카드 |
-| `radius-card` | `20px` | 카드·시트 |
+| `radius-card` | `20px` (antd `borderRadius` 16) | 카드·시트·컨트롤 |
 | 폰트 | **Pretendard Variable** (CDN) → `Apple SD Gothic Neo` fallback | 전체 |
 
 - 칩·버튼은 모두 알약(`999px`), 카드 안 사진은 `15px` 라운드로 이중 리듬을 만듭니다.
@@ -180,7 +180,7 @@ public/images/                생성한 편집 사진 7장
 - `CrewlogProvider`가 시드 데이터를 초기값으로 잡고, 참여·다음에·좋아요·저장·부스트·쿠폰·작성을 한 곳에서 처리합니다.
 - 파생 값(필터된 피드, 남은 자리, 부스트 여부)은 `useMemo`로 계산하고, 액션은 낙관적으로 상태를 먼저 바꿉니다.
 - 새로 만든 번개·인증샷은 이 브라우저 세션에만 존재합니다(새로고침하면 시드로 돌아갑니다). `prisma/schema.prisma` 모델과 1:1로 대응되도록 설계되어 데이터 레이어만 교체하면 영속화할 수 있습니다.
-- 지도 좌표는 `Meetup.lat/lng`, `SponsorPin.lat/lng`에 있습니다. 새 번개는 선택한 동네 중심에서 ±300m 안쪽에 배치됩니다.
+- 지도 좌표는 앱 타입 `Meetup.lat/lng` · `SponsorPin.lat/lng`에 있고, Prisma 모델에서는 `latitude` · `longitude`입니다. 새 번개는 선택한 동네 중심에서 ±300m 안쪽에 배치됩니다.
 
 ---
 

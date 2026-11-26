@@ -63,6 +63,8 @@ model Meetup {
   neighborhood Neighborhood
   startsAt     DateTime
   place        String
+  latitude     Float        @default(0)
+  longitude    Float        @default(0)
   capacity     Int
   coverImage   String?
   boostedUntil DateTime?
