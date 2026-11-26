@@ -15,6 +15,7 @@ import { Avatar } from "../ui";
 import dayjs from "dayjs";
 import { ME, USERS, userOf } from "@/lib/seed";
 import { useCrewlog } from "@/lib/store";
+import { asset } from "@/lib/asset";
 
 interface Notice {
   id: string;
@@ -36,7 +37,7 @@ const SEED_NOTICES: Notice[] = [
     body: "“세 번째 사진, 어느 골목인가요?”",
     time: "1시간 전",
     unread: true,
-    thumb: "/images/seongsu-dusk.jpg",
+    thumb: asset("/images/seongsu-dusk.jpg"),
   },
   {
     id: "n2",

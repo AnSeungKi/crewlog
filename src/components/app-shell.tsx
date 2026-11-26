@@ -19,6 +19,7 @@ import { ActivityScreen } from "./screens/activity";
 import { ProfileScreen } from "./screens/profile";
 import { ME } from "@/lib/seed";
 import { useCrewlog } from "@/lib/store";
+import { BASE_PATH } from "@/lib/asset";
 
 export type TabKey = "home" | "map" | "activity" | "profile";
 
@@ -47,7 +48,9 @@ export function AppShell() {
 
   const switchTab = (next: TabKey) => {
     setTab(next);
-    window.history.replaceState(null, "", next === "home" ? "/" : `/#${next}`);
+    // history.replaceState bypasses Next's basePath handling, so prefix it here.
+    const url = next === "home" ? `${BASE_PATH}/` : `${BASE_PATH}/#${next}`;
+    window.history.replaceState(null, "", url);
     window.scrollTo({ top: 0, behavior: "instant" as ScrollBehavior });
   };
 

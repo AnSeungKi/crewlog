@@ -19,6 +19,7 @@ import { MeetupRow, ProofCard } from "./cards";
 import { categoryOf, neighborhoodOf } from "@/lib/seed";
 import { clock, dayBadge, fromNow, pct } from "@/lib/format";
 import { useCrewlog } from "@/lib/store";
+import { BASE_PATH } from "@/lib/asset";
 
 const MarkerMap = dynamic(() => import("./map/marker-map"), {
   ssr: false,
@@ -78,7 +79,9 @@ export function MeetupDetailBody({ id, onBack }: { id: string; onBack: () => voi
   const mine = meetup.hostId === "u1";
 
   const share = async () => {
-    const url = meetup.persisted ? `${window.location.origin}/meetups/${meetup.id}` : window.location.href;
+    const url = meetup.persisted
+      ? `${window.location.origin}${BASE_PATH}/meetups/${meetup.id}/`
+      : window.location.href;
     try {
       if (navigator.share) {
         await navigator.share({ title: meetup.title, text: meetup.description.slice(0, 80), url });

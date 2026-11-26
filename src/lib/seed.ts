@@ -1,4 +1,5 @@
 import dayjs from "dayjs";
+import { asset } from "./asset";
 import type {
   Category,
   CrewUser,
@@ -207,7 +208,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u2", "u1", "u8", "u7", "u4", "u6", "u3", "u5"],
     description:
       "각자 페이스로 6km를 달립니다. 말은 없어도 됩니다. 마지막 400m만 같이 들어와요. 7분/km부터 5분/km까지 알아서 흩어지고, 끝나고 물 한 잔은 제가 쏩니다. 처음 오시면 시작 전에 손 한 번 잡고 출발해요.",
-    cover: "/images/hanriver-run.jpg",
+    cover: asset("/images/hanriver-run.jpg"),
     boostedUntil: at(1, "19:30"),
     persisted: true,
   },
@@ -225,7 +226,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u3", "u7", "u4", "u1", "u6", "u8"],
     description:
       "각자 하던 일 들고 오세요. 두 시간 집중하고 30분 수다 떱니다. 콘센트 가까운 자리는 먼저 온 사람 것. 참여자에게는 아메리카노 20% 할인 쿠폰이 따라옵니다.",
-    cover: "/images/seongsu-cafe.jpg",
+    cover: asset("/images/seongsu-cafe.jpg"),
     sponsorId: "s-roastery",
     persisted: true,
   },
@@ -243,7 +244,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u6", "u2", "u7", "u4", "u3", "u8", "u5"],
     description:
       "왕복 4시간, 초보 능선 코스입니다. 등산화만 있으면 됩니다. 간식은 나눠 먹어요. 하산 후 막걸리 한 잔은 선택이지만 대부분 하십니다.",
-    cover: "/images/bukhansan-hike.jpg",
+    cover: asset("/images/bukhansan-hike.jpg"),
     persisted: true,
   },
   {
@@ -260,7 +261,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u5", "u1", "u7", "u4"],
     description:
       "룰 몰라도 됩니다. 가벼운 파티게임부터 두 판 정도 돌립니다. 처음 오신 분에게는 음료 한 잔 서비스. 늦어도 11시에는 끝나요.",
-    cover: "/images/yeonnam-boardgame.jpg",
+    cover: asset("/images/yeonnam-boardgame.jpg"),
     sponsorId: "s-salon",
     persisted: true,
   },
@@ -278,7 +279,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u4", "u1", "u7", "u3", "u8"],
     description:
       "필름이든 폰이든 상관없어요. 네 블록을 두 시간 천천히 걷습니다. 빛이 좋은 골목은 제가 알고 있습니다. 현상한 사진은 다음 주에 같이 봐요.",
-    cover: "/images/photowalk-alley.jpg",
+    cover: asset("/images/photowalk-alley.jpg"),
     persisted: true,
   },
   {
@@ -307,7 +308,7 @@ export const MEETUPS: Meetup[] = [
     ],
     description:
       "출근 전 5km, 6시 40분 출발. 7시 20분이면 다들 씻고 나올 수 있는 코스입니다. 매주 화·목요일, 비 오면 쉽니다.",
-    cover: "/images/pangyo-morning.jpg",
+    cover: asset("/images/pangyo-morning.jpg"),
     persisted: true,
   },
   {
@@ -340,7 +341,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u10", "u2", "u9", "u12", "u3"],
     description:
       "밤의 한강을 두 바퀴 도는 10km입니다. 페이스는 6분 30초, 말은 적게. 반사 조끼나 밝은 색 상의를 입어주세요. 끝나고 편의점에서 아이스크림 한 개.",
-    cover: "/images/hanriver-run.jpg",
+    cover: asset("/images/hanriver-run.jpg"),
     persisted: true,
   },
   {
@@ -357,7 +358,7 @@ export const MEETUPS: Meetup[] = [
     participantIds: ["u4", "u11", "u1", "u7"],
     description:
       "해 지기 40분 전에 모여 노을이 끝날 때까지 걷습니다. 삼각대 없이, 손으로. 폰 카메라도 환영이고 마지막에 서로 한 장씩 찍어줍니다.",
-    cover: "/images/seongsu-dusk.jpg",
+    cover: asset("/images/seongsu-dusk.jpg"),
     persisted: true,
   },
   {
@@ -424,7 +425,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "photowalk",
     neighborhoodId: "seongsu",
     authorId: "u1",
-    image: "/images/seongsu-dusk.jpg",
+    image: asset("/images/seongsu-dusk.jpg"),
     createdAt: hoursAgo(2),
     baseLikeCount: 173,
   },
@@ -436,7 +437,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "photowalk",
     neighborhoodId: "seongsu",
     authorId: "u4",
-    image: "/images/photowalk-alley.jpg",
+    image: asset("/images/photowalk-alley.jpg"),
     createdAt: hoursAgo(5),
     meetupId: "m-seongsu-photowalk",
     baseLikeCount: 128,
@@ -449,7 +450,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "running",
     neighborhoodId: "jamsil",
     authorId: "u2",
-    image: "/images/hanriver-run.jpg",
+    image: asset("/images/hanriver-run.jpg"),
     createdAt: hoursAgo(8),
     meetupId: "m-hanriver-6k",
     baseLikeCount: 214,
@@ -462,7 +463,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "hiking",
     neighborhoodId: "yeonnam",
     authorId: "u6",
-    image: "/images/bukhansan-hike.jpg",
+    image: asset("/images/bukhansan-hike.jpg"),
     createdAt: hoursAgo(26),
     meetupId: "m-bukhansan-ridge",
     baseLikeCount: 96,
@@ -475,7 +476,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "boardgame",
     neighborhoodId: "yeonnam",
     authorId: "u5",
-    image: "/images/yeonnam-boardgame.jpg",
+    image: asset("/images/yeonnam-boardgame.jpg"),
     createdAt: hoursAgo(31),
     meetupId: "m-yeonnam-boards",
     baseLikeCount: 61,
@@ -488,7 +489,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "cafe",
     neighborhoodId: "seongsu",
     authorId: "u3",
-    image: "/images/seongsu-cafe.jpg",
+    image: asset("/images/seongsu-cafe.jpg"),
     createdAt: hoursAgo(34),
     meetupId: "m-seongsu-table",
     sponsorId: "s-roastery",
@@ -502,7 +503,7 @@ export const POSTS: ProofPost[] = [
     categoryId: "running",
     neighborhoodId: "pangyo",
     authorId: "u8",
-    image: "/images/pangyo-morning.jpg",
+    image: asset("/images/pangyo-morning.jpg"),
     createdAt: hoursAgo(48),
     meetupId: "m-pangyo-5k",
     baseLikeCount: 42,
@@ -642,22 +643,22 @@ export const FEED: FeedItem[] = [
  * ------------------------------------------------------------------ */
 
 export const COVER_OPTIONS = [
-  { src: "/images/seongsu-dusk.jpg", label: "성수의 저녁" },
-  { src: "/images/seongsu-cafe.jpg", label: "카페 테이블" },
-  { src: "/images/hanriver-run.jpg", label: "한강 러닝" },
-  { src: "/images/bukhansan-hike.jpg", label: "능선" },
-  { src: "/images/yeonnam-boardgame.jpg", label: "보드게임" },
-  { src: "/images/photowalk-alley.jpg", label: "골목" },
-  { src: "/images/pangyo-morning.jpg", label: "판교 아침" },
+  { src: asset("/images/seongsu-dusk.jpg"), label: "성수의 저녁" },
+  { src: asset("/images/seongsu-cafe.jpg"), label: "카페 테이블" },
+  { src: asset("/images/hanriver-run.jpg"), label: "한강 러닝" },
+  { src: asset("/images/bukhansan-hike.jpg"), label: "능선" },
+  { src: asset("/images/yeonnam-boardgame.jpg"), label: "보드게임" },
+  { src: asset("/images/photowalk-alley.jpg"), label: "골목" },
+  { src: asset("/images/pangyo-morning.jpg"), label: "판교 아침" },
 ];
 
 /** default cover per category, so a meetup created in the app never looks empty */
 export const CATEGORY_COVERS: Record<Category["id"], string> = {
-  running: "/images/hanriver-run.jpg",
-  cafe: "/images/seongsu-cafe.jpg",
-  hiking: "/images/bukhansan-hike.jpg",
-  boardgame: "/images/yeonnam-boardgame.jpg",
-  photowalk: "/images/photowalk-alley.jpg",
+  running: asset("/images/hanriver-run.jpg"),
+  cafe: asset("/images/seongsu-cafe.jpg"),
+  hiking: asset("/images/bukhansan-hike.jpg"),
+  boardgame: asset("/images/yeonnam-boardgame.jpg"),
+  photowalk: asset("/images/photowalk-alley.jpg"),
 };
 
 export const BOOST_PRICE = 2900;
